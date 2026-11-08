@@ -1,0 +1,36 @@
+[package]
+name = "imgui-x11-overlay"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+
+# Windowing (forced to the X11 backend at runtime)
+winit = { version = "0.29", features = ["rwh_05"] }
+raw-window-handle = "0.5"
+
+# Vulkan. ash / ash-window / the imgui renderer must agree on the ash version.
+ash = "0.37"
+ash-window = "0.12"
+
+# Dear ImGui + Vulkan backend
+imgui = "0.11"
+imgui-rs-vulkan-renderer = "=1.12.0"
+
+# X11 queries (focused window) + input shape (click-through)
+x11rb = { version = "0.13", features = ["shape"] }
+
+# Raw input from /dev/input (evdev): open/read/ioctl
+libc = "0.2"
+
+[profile.release]
+lto = "thin"
+
+[features]
+# Sharper small text through FreeType auto-hinting instead of stb_truetype.
+# Needs the FreeType dev package + cmake/pkg-config:  sudo apt install libfreetype-dev cmake pkg-config
+freetype = ["imgui/freetype"]
+# Docking colors of the theme. Also enable imgui's own feature when you use it:
+#   imgui = { version = "0.11", features = ["docking"] }
+docking = []

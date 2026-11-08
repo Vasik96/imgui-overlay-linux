@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=ImGui X11 Overlay
+Comment=Dear ImGui overlay (asks for administrator authentication)
+Exec=@EXEC@
+Terminal=false
+Categories=Utility;
